@@ -13,6 +13,12 @@ import java.util.Calendar;
  */
 public class Quiz {
     
+    
+        public Quiz()
+    {
+        
+    }
+        
     public Connection ConnectToDB()
     {
         Connection conn= null;
@@ -35,10 +41,8 @@ public class Quiz {
                
          return conn;
     }
-    public Quiz()
-    {
-        
-    }
+    
+
     
     public boolean NewQuiz(String quiz_name,String module, int staff_ID)
     {
@@ -58,15 +62,70 @@ public class Quiz {
 
             conn.close();
                 
-       
+            return true;
         }
           catch ( Exception e)
                         {
                         System.err.println(" there was an SQL exception");
                         }
-         return true;
+         return false;
     }
     
+    public int GetQuizID(String quiz_name, int staff_ID)
+    {
+        Connection conn =  ConnectToDB();
+        
+        PreparedStatement ps ;
+        int quizid = 0;
+        if (conn!=null)
+        {
+            try
+            {
+                String query = "SELECT QuizID FROM Quiz WHERE QuizName=? AND staff_ID=?;";
+
+               ps = conn.prepareStatement(query);
+               ps.setString(1,quiz_name);
+               ps.setInt(2, staff_ID);
+               ResultSet rs = ps.executeQuery();
+
+               while (rs.next())
+               {
+                  quizid = rs.getInt("QuizID");
+               }
+
+               
+               conn.close();
+               return quizid;
+               
+            }       
+                    
+            
+              catch ( Exception e)
+            {
+                       System.err.println(" there was an exception");
+            }
+                    
+                 finally
+            {
+              /*  if (ps != null)
+                {
+                    ps.close();
+                }
+
+                if( conn !=null)
+                {
+                    conn.close();
+                }
+                */
+            }
+        }
+        
+        else
+        {
+            System.out.println("It was not possible to make a connection");
+        }
+        return quizid;
+    }
     
     public boolean NewQuestion()
     {
