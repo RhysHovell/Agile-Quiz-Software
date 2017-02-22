@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import AgileQuiz.stores.LoggedIn;
+
 
 
 /**
@@ -25,7 +27,7 @@ import java.io.IOException;
 public class Login extends HttpServlet {
     
     public void init(ServletConfig config) throws ServletException {
-        
+        //Add sql config
     }
     
 }
