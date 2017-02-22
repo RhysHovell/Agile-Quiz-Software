@@ -43,9 +43,9 @@
           </nav>
     
         <div class = "container">
-            <form class = "signin">
+            <form method="POST" class = "signin">
                 <h2 class = "signin-heading">Student Login</h2>
-                <input type="staffid" id="staffID" class="form-control" placeholder="Staff ID" required="" autofocus="">
+                <input type="matricNo" id="matricNo" class="form-control" placeholder="Staff ID" required="" autofocus="">
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
