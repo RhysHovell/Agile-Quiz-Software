@@ -52,7 +52,7 @@
                
 
         <ul>
-                <li class="nav"><a href="makeQuiz.jsp">Create A Quiz</a></li>
+                <li class="nav"><a href="createQuiz.jsp">Create A Quiz</a></li>
                 <li class="nav"><a href="quizSelection.jsp">Select A Quiz</a></li>
                 <li class="nav"><a href="staffLogin.jsp">Staff Login</a></li>
                 <li class="nav"><a href="studentLogin.jsp">Student Login</a></li>
@@ -62,7 +62,7 @@
         </ul>
         <div class = "container">
                <h2>Add a Quiz to which Module</h2>
-                       <form name="moduleform" form method ="POST" action ="makeQuiz.jsp" onsubmit="return validateModule()">
+                       <form name="moduleform" form method ="POST" action ="addQuestion.jsp" onsubmit="return validateModule()">
                             <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
                             <input id = "question" type="text"  name="module" class ="form-control" placeholder="Enter Module Here">

@@ -55,7 +55,7 @@
     </head>
         <nav>
             <ul>
-                <li class="nav"><a href="makeQuiz.jsp">Create A Quiz</a></li>
+                <li class="nav"><a href="createQuiz.jsp">Create A Quiz</a></li>
                 <li class="nav"><a href="quizSelection.jsp">Select A Quiz</a></li>
                 <li class="nav"><a href="staffLogin.jsp">Staff Login</a></li>
                 <li class="nav"><a href="studentLogin.jsp">Student Login</a></li>
