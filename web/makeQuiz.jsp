@@ -85,13 +85,14 @@
                 <li class="nav"><a href="student.jsp">Student</a></li>
                 <li class="nav"><a href="index.jsp">Home</a></li>
         </ul>
+        
                <h2>Add a Quiz to which Module</h2>
                        <form name="moduleform" form method ="POST" action ="Module" onsubmit="return validateModule()">
                             <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
                             <input id = "question" type="text"  name="module" class ="form-control" placeholder="Enter Module Here">
                             <p id = "module"></p>
-                            <input type ="submit" name="module" value="Confirm Module">
+ 
                             </form>
                        </div>
     <div class ="container-hide">

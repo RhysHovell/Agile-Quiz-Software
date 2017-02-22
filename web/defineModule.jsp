@@ -60,18 +60,23 @@
                 <li class="nav"><a href="student.jsp">Student</a></li>
                 <li class="nav"><a href="index.jsp">Home</a></li>
         </ul>
+        <div class = "container">
                <h2>Add a Quiz to which Module</h2>
                        <form name="moduleform" form method ="POST" action ="makeQuiz.jsp" onsubmit="return validateModule()">
                             <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
                             <input id = "question" type="text"  name="module" class ="form-control" placeholder="Enter Module Here">
                             </div>
-                            <div>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                            <input id = "question" type="text"  name="module" class ="form-control" placeholder="Enter Module Here">
-                            <input type ="submit" name="module" value="Confirm Module">
+ 
+                <h2>Enter Quiz Name</h2>
+                <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                            <input id = "question" type="text"  name="module" class ="form-control" placeholder="Enter Quiz Name Here">
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Confirm</button>
                             <p id = "module"></p>
                             </form>
-                       </div>
+        </div>
+                       
     </body>
 </html>

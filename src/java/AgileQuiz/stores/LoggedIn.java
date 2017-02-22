@@ -15,7 +15,6 @@ public class LoggedIn {
     public void LoggedIn(){
         
     }
-    
     public void setLoggedIn(){
         loggedIn=true;
     }
