@@ -127,8 +127,45 @@ public class Quiz {
         return quizid;
     }
     
-    public boolean NewQuestion()
+    public boolean NewQuestion(int question_number , int quiz_id , String question, String answer, boolean iscorrect)
     {
+               
+        try
+        {
+            //Quiz quizConnect = new Quiz();
+            Connection conn = ConnectToDB();
+            String query = "INSERT INTO Question (QuizID, QuestionNo, Question)" + "VALUES (?, ?, ?)";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, quiz_id);
+            ps.setInt(2, question_number);
+            ps.setString(3, question);
+
+            ps.execute();
+            ps.close();
+            
+            //retrieve question ID and insert into answer table along with answer text and bool.
+            String query2 = "INSERT INTO Answer (AnswerText, Correct, QuestionID)" + "VALUES (?, ?, ?)";
+
+             ps = conn.prepareStatement(query2);
+            //ps.setString(1, );
+            ps.setInt(2, question_number);
+            ps.setString(3, question);
+
+            ps.execute();
+            ps.close();
+            
+            
+            conn.close();
+                
+            return true;
+        }
+          catch ( Exception e)
+                        {
+                        System.err.println(" there was an SQL exception");
+                        }
+         return false;
+        
         return true;
     }
     

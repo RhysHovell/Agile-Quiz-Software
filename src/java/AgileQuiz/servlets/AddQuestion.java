@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author brodieross
  */
-@WebServlet(name = "CreateQuiz", urlPatterns = {"/CreateQuiz"})
-public class CreateQuiz extends HttpServlet {
+@WebServlet(name = "AddQuestion", urlPatterns = {"/AddQuestion"})
+public class AddQuestion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class CreateQuiz extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateQuiz</title>");            
+            out.println("<title>Servlet AddQuestion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreateQuiz at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddQuestion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,17 +73,26 @@ public class CreateQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                 //  processRequest(request, response);
-                  String module = request.getParameter("module");
-                  String quiz_name = request.getParameter("quiz_name");
-                  int staffid = (int) request.getSession().getAttribute("staffID");
-
-                  Quiz quiz = new Quiz();
-                  quiz.NewQuiz(quiz_name, module, staffid);
-
-                  response.sendRedirect("/AgileQuizSoftware/addQuestion.jsp");
-    
-                                                   }
+        //processRequest(request, response);
+        int question_num = Integer.parseInt(request.getParameter("question_number"));
+        String question = request.getParameter("question_asked");
+        String correct_answer = request.getParameter("correct_answer");
+        String answer2 = request.getParameter("answer_two");
+        String answer3 = request.getParameter("answer_three");
+        String answer4 = request.getParameter("answer_four");
+         
+        
+        
+        
+        Quiz quiz = new Quiz();
+         int staff_id = (int) request.getSession().getAttribute("staffID");
+         String quiz_name = (String)request.getSession().getAttribute("Quizname");
+        // need to implement storage of current quiz and staff id as session variables
+        
+        int quizid= quiz.GetQuizID(quiz_name, staff_id);
+        quiz.NewQuestion();
+        
+    }
 
     /**
      * Returns a short description of the servlet.

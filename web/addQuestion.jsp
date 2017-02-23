@@ -104,7 +104,7 @@
                        </div>-->
     <div class ="container-hide">
         <h2>Create Question</h2>
-        <form name="questionform" form method ="POST" action ="Question" onsubmit="return validateQuestion()">
+        <form name="questionform" form method ="POST" action ="AddQuestion" onsubmit="return validateQuestion()">
         
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
@@ -123,7 +123,7 @@
 
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-ok"role ="button"></i></span>
-                <input id="answerThree" type="text" class="form-control" name="answer_three" placeholder="Enter Answer Three Here">
+                <input id="answerThree" type="text" class="form-control" name="" placeholder="Enter Answer Three Here">
             </div>
 
             <div class="input-group">
