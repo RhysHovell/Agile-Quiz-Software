@@ -6,6 +6,8 @@
 package Models;
 import java.sql.*;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Brodie
@@ -18,30 +20,28 @@ public class Quiz {
     {
         
     }
+       
+      
+        public Connection ConnectToDB() {
+         Connection conn = null;
+
+        try {
+            String myDriver = "com.mysql.jbdc.Driver";
+            String myURL = "jdbc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");
+            return conn;
+
+        } catch (SQLException e) {
+            System.err.println(" there was an SQL exception");
+        } 
         
-    public Connection ConnectToDB()
-    {
-        Connection conn= null;
- 
-        try
-        {
-          String myDriver="org.gjt.mm.mysql.Driver";
-          String myURL = "jbdc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
-          Class.forName(myDriver);
-          conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return conn;
-          
-         
-        }          
-                catch ( Exception e)
-                        {
-                        System.err.println(" there was an SQL exception");
-                        }
-              
-               
-         return conn;
     }
-    
 
     
     public boolean NewQuiz(String quiz_name,String module, int staff_ID)
@@ -51,7 +51,7 @@ public class Quiz {
         {
             //Quiz quizConnect = new Quiz();
             Connection conn = ConnectToDB();
-            String query = "INSERT INTO QUIZ (QuizName, Module, StaffID)" + "VALUES (?, ?, ?)";
+            String query = "INSERT INTO QUIZ (QuizName, ModuleCode, StaffID) VALUES (?, ?, ?);";
 
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, quiz_name);
@@ -127,7 +127,7 @@ public class Quiz {
         return quizid;
     }
     
-    public boolean NewQuestion(int question_number , int quiz_id , String question, String answer, boolean iscorrect)
+    public boolean NewQuestion(int question_number , int quiz_id , String question )
     {
                
         try
@@ -166,7 +166,7 @@ public class Quiz {
                         }
          return false;
         
-        return true;
+        
     }
     
     

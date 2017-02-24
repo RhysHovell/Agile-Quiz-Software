@@ -5,6 +5,7 @@
  */
 package AgileQuiz.servlets;
 
+import AgileQuiz.stores.LoggedIn;
 import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,9 +77,10 @@ public class CreateQuiz extends HttpServlet {
                  //  processRequest(request, response);
                   String module = request.getParameter("module");
                   String quiz_name = request.getParameter("quiz_name");
-                  int staffid = (int) request.getSession().getAttribute("staffID");
-
-                  Quiz quiz = new Quiz();
+                  LoggedIn lg = (LoggedIn) request.getSession().getAttribute("LoggedIn");
+                   int staffid = lg.getStaffID();
+                 
+                   Quiz quiz = new Quiz();
                   quiz.NewQuiz(quiz_name, module, staffid);
 
                   response.sendRedirect("/AgileQuizSoftware/addQuestion.jsp");

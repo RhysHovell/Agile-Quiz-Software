@@ -7,6 +7,7 @@ package AgileQuiz.servlets;
  */
 
 import AgileQuiz.libraries.DBconnection;
+import AgileQuiz.stores.LoggedIn;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -46,19 +47,25 @@ public class StaffLogin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
-            String staffid = request.getParameter("staffid");
+            String username = request.getParameter("staffid");
             String password = request.getParameter("password");
             DBconnection db = new DBconnection();
             Connection con = db.getCon();
             PreparedStatement ps = con.prepareStatement("Select * FROM staff WHERE StaffID = ? AND Password = ?");
-                        
-            ps.setString(1, staffid);
+            
+            int staffid = Integer.parseInt(username);
+            ps.setInt(1, staffid);
             ps.setString(2, password);
             
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+              
+                
+                LoggedIn lg = new LoggedIn();
+                lg.setStaffID(staffid);
                 HttpSession session = request.getSession(true);
                 session.setAttribute("Welcome ", staffid);
+                session.setAttribute("LoggedIn",lg);
                 RequestDispatcher rd = request.getRequestDispatcher("createQuiz.jsp");
                 rd.include(request, response);
             }

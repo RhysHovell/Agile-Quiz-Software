@@ -12,6 +12,7 @@ package AgileQuiz.stores;
 public class LoggedIn {
     boolean loggedIn = false;
     int matric =0;
+    int staffid = 0;
     
     public void LoggedIn(){
         
@@ -23,6 +24,14 @@ public class LoggedIn {
         loggedIn=false;
     }
     
+    public int getStaffID()
+    {
+        return staffid;
+    }
+    public void setStaffID(int staffid)
+    {
+        this.staffid=staffid;
+    }
     
     public int getMatric(){
         return matric;

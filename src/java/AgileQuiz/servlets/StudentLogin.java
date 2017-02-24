@@ -46,13 +46,14 @@ public class StudentLogin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
-            String studentid = request.getParameter("studentid");
+            String username = request.getParameter("studentid");
             String password = request.getParameter("password");
             DBconnection db = new DBconnection();
             Connection con = db.getCon();
             PreparedStatement ps = con.prepareStatement("Select * FROM student WHERE MatricNo = ? AND Password = ?");
                         
-            ps.setString(1, studentid);
+            int studentid = Integer.parseInt(username);
+            ps.setInt(1, studentid);
             ps.setString(2, password);
             
             ResultSet rs = ps.executeQuery();
