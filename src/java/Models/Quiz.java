@@ -134,7 +134,7 @@ public class Quiz {
         {
             //Quiz quizConnect = new Quiz();
             Connection conn = ConnectToDB();
-            String query = "INSERT INTO Question (QuizID, QuestionNo, Question)" + "VALUES (?, ?, ?)";
+            String query = "INSERT INTO Question (QuizID, QuestionNo, Question) VALUES (?, ?, ?);";
 
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, quiz_id);
@@ -144,6 +144,7 @@ public class Quiz {
             ps.execute();
             ps.close();
             
+            /*
             //retrieve question ID and insert into answer table along with answer text and bool.
             String query2 = "INSERT INTO Answer (AnswerText, Correct, QuestionID)" + "VALUES (?, ?, ?)";
 
@@ -154,7 +155,7 @@ public class Quiz {
 
             ps.execute();
             ps.close();
-            
+            */
             
             conn.close();
                 

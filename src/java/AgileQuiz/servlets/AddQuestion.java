@@ -5,6 +5,7 @@
  */
 package AgileQuiz.servlets;
 
+import AgileQuiz.stores.LoggedIn;
 import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -85,12 +86,13 @@ public class AddQuestion extends HttpServlet {
         
         
         Quiz quiz = new Quiz();
-         int staff_id = (int) request.getSession().getAttribute("staffID");
-         String quiz_name = (String)request.getSession().getAttribute("Quizname");
+        LoggedIn lg = (LoggedIn) request.getSession().getAttribute("LoggedIn");
+        int staff_id = lg.getStaffID();
+        String quiz_name = (String)request.getSession().getAttribute("Quizname");
         // need to implement storage of current quiz and staff id as session variables
         
         int quizid= quiz.GetQuizID(quiz_name, staff_id);
-        quiz.NewQuestion();
+        quiz.NewQuestion(quizid, question_num, question);
         
     }
 

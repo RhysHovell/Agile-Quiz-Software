@@ -106,6 +106,11 @@
         <h2>Create Question</h2>
         <form name="questionform" form method ="POST" action ="AddQuestion" onsubmit="return validateQuestion()">
         
+            
+             <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
+                <input id = "question" type="number"  name="question_number" class ="form-control" placeholder="Enter Question Number Here">
+            </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
                 <input id = "question" type="text"  name="question_asked" class ="form-control" placeholder="Enter Question Here">
