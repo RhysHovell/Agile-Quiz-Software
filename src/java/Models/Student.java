@@ -5,6 +5,8 @@
  */
 package Models;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -103,5 +105,9 @@ public class Student {
         return false;
                 
     }
+    
+    
+    
+    
     
 }

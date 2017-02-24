@@ -10,15 +10,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+//Rename to AgileQuiz.Models
+import Models.Staff;
+import AgileQuiz.stores.LoggedIn;
+
 /**
  *
  * @author petersallai
  */
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
     /**
@@ -36,19 +42,41 @@ public class Login extends HttpServlet {
         PrintWriter out = response.getWriter();
         String username = request.getParameter("staffid");
         String password = request.getParameter("password");
-        try {
-            if(username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
-                HttpSession session = request.getSession();
-                session.setAttribute("staff", username);
-                RequestDispatcher rd = request.getRequestDispatcher("Login2.java");
-                rd.forward(request,response);
-            } else {
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                rd.include(request, response);
-            }
-        } finally {
-            out.close();
+        
+        //Staff Model
+        Staff staff = new Staff();
+        boolean isValid = staff.IsValidStaff(username, password);
+        
+        if(isValid){
+            LoggedIn lg = new LoggedIn();
+            lg.setLoggedIn();
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("LoggedIn",lg);
+            response.sendRedirect("createQuiz.jsp");
+            
+        } else {
+            
+            System.out.println("Login not valid");
+            response.sendRedirect("index.jsp");
+            
         }
+            
+        
+        
+        //try {
+        //    if(username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
+        //        HttpSession session = request.getSession();
+        //        session.setAttribute("staff", username);
+        //        RequestDispatcher rd = request.getRequestDispatcher("Login2.java");
+        //        rd.forward(request,response);
+        //    } else {
+        //        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        //        rd.include(request, response);
+        //    }
+        //} finally {
+        //    out.close();
+        //}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
