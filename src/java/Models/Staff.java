@@ -30,8 +30,8 @@ public class Staff {
 
         try {
             String myDriver = "com.mysql.jbdc.Driver";
-            String myURL = "jbdc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
-            Class.forName(myDriver).newInstance();
+            String myURL = "jdbc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
+            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");
             return conn;
 
@@ -39,7 +39,7 @@ public class Staff {
             System.err.println(" there was an SQL exception");
         } 
         
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+        catch (ClassNotFoundException ex) {
             Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
         }
 

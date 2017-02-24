@@ -43,7 +43,7 @@
           </nav>
     
         <div class = "container">
-            <form method="POST" class = "signin">
+            <form method="POST" action="StudentLogin" class = "signin">
                 <h2 class = "signin-heading">Student Login</h2>
                 <input type="matricNo" id="matricNo" class="form-control" placeholder="Staff ID" required="" autofocus="">
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
