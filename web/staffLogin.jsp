@@ -72,7 +72,7 @@
           </nav>
     
         <div class = "container">
-            <form method = "POST" action ="Login" class = "signin"name ="loginform" onsubmit="return validateLogin()">
+            <form method="POST" action="StaffLogin" class="signin" onsubmit="return validateLogin()">
                 <h2 class = "signin-heading">Staff Member Login</h2>
                 <input type="text" name="staffid" id="staffID" class="form-control" placeholder="Staff ID" required="" autofocus="">
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">

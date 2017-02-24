@@ -45,9 +45,8 @@
         <div class = "container">
             <form method="POST" action="StudentLogin" class = "signin">
                 <h2 class = "signin-heading">Student Login</h2>
-                <input type="matricNo" id="matricNo" class="form-control" placeholder="Staff ID" required="" autofocus="">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-
+                <input type="text" name="studentid" id="matricNo" class="form-control" placeholder="Staff ID" required="" autofocus="">
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             </form>
         </div>

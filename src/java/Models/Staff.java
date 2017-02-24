@@ -45,7 +45,7 @@ public class Staff {
 
         return conn;
     }
-
+/*
     //Check if user credentials are valid
     public boolean IsValidStaff(String staffID, String password) {
 
@@ -84,6 +84,6 @@ public class Staff {
         }
 
         return false;
-    }
+    }*/
 
 }
