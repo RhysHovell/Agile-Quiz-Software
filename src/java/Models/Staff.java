@@ -5,6 +5,8 @@
  */
 package Models;
 
+//import com.mysql.jbdc.Driver;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,19 +29,21 @@ public class Staff {
         Connection conn = null;
 
         try {
-            String myDriver = "org.gjt.mm.mysql.Driver";
+            String myDriver = "com.mysql.jbdc.Driver";
             String myURL = "jbdc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
-            Class.forName(myDriver);
+            Class.forName(myDriver).newInstance();
             conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");
             return conn;
 
         } catch (SQLException e) {
             System.err.println(" there was an SQL exception");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return null;
+        return conn;
     }
 
     //Check if user credentials are valid

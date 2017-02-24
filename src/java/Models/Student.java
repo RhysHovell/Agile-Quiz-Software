@@ -31,7 +31,7 @@ public class Student {
  
         try
         {
-          String myDriver="org.gjt.mm.mysql.Driver";
+          String myDriver="com.mysql.jbdc.Driver";
           String myURL = "jbdc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
           Class.forName(myDriver);
           conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");

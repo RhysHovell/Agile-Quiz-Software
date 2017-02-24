@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+      /*  response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String username = request.getParameter("staffid");
         String password = request.getParameter("password");
@@ -59,8 +59,8 @@ public class Login extends HttpServlet {
             
             System.out.println("Login not valid");
             response.sendRedirect("index.jsp");
-            
-        }
+         */   
+        
             
         
         
@@ -104,9 +104,34 @@ public class Login extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            throws ServletException, IOException 
+    
+    {
+        //processRequest(request, response);
+      response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String username = request.getParameter("staffid");
+        String password = request.getParameter("password");
+        
+        //Staff Model
+        Staff staff = new Staff();
+        boolean isValid = staff.IsValidStaff(username, password);
+        
+        if(isValid){
+            LoggedIn lg = new LoggedIn();
+            lg.setLoggedIn();
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("LoggedIn",lg);
+            response.sendRedirect("createQuiz.jsp");
+            
+        } else {
+            
+            System.out.println("Login not valid");
+            response.sendRedirect("index.jsp");
+            
+        }
+          }
 
     /**
      * Returns a short description of the servlet.
