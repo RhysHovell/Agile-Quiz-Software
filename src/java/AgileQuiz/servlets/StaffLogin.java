@@ -70,7 +70,7 @@ public class StaffLogin extends HttpServlet {
                 rd.include(request, response);
             }
             else{
-                RequestDispatcher rd = request.getRequestDispatcher("staffLogin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("staffLoginError.jsp");
                 rd.include(request, response);
                 out.close();
             }

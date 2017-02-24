@@ -60,11 +60,11 @@ public class StudentLogin extends HttpServlet {
             if (rs.next()) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("Welcome ", studentid);
-                RequestDispatcher rd = request.getRequestDispatcher("createQuiz.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("quizSelection.jsp");
                 rd.include(request, response);
             }
             else{
-                RequestDispatcher rd = request.getRequestDispatcher("studentLogin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("studentLoginError.jsp");
                 rd.include(request, response);
                 out.close();
             }

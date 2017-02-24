@@ -1,7 +1,7 @@
 <%-- 
-    Document   : studentLogin
-    Created on : 21-Feb-2017, 16:34:03
-    Author     : Adam
+    Document   : studentLoginError
+    Created on : 24-Feb-2017, 21:05:24
+    Author     : petersallai
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -79,6 +79,7 @@
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 <p id ="output"></p>
+                <p style="color:red;">username or password is wrong, try again</p>
             </form>
         </div>
     </body>

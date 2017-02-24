@@ -1,7 +1,7 @@
 <%-- 
-    Document   : studentLogin
-    Created on : 21-Feb-2017, 16:34:03
-    Author     : Adam
+    Document   : staffLoginError
+    Created on : 24-Feb-2017, 21:05:13
+    Author     : petersallai
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,7 +17,7 @@
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        
+
         <link href ="CSS/signin.css" rel ="stylesheet">
 
         <!-- Latest compiled and minified JavaScript -->
@@ -32,7 +32,7 @@
                 var staffid = document.forms["loginform"]["staffid"].value;
                 var password = document.forms["loginform"]["password"].value;
                 if (staffid == ""){
-                    document.getElementById("output").innerHTML = "Student ID is blank";
+                    document.getElementById("output").innerHTML = "Staff ID is blank";
                     return false;
                 }
                 else
@@ -52,10 +52,9 @@
         </script>
         
         <title>JSP Page</title>
-        
     </head>
     <body>
-          <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
               <div class="navbar-header">
                 <a class="navbar-brand" href="#">QuizzyBoy</a>
@@ -73,12 +72,13 @@
           </nav>
     
         <div class = "container">
-            <form method="POST" action="StudentLogin" class = "signin">
-                <h2 class = "signin-heading">Student Login</h2>
-                <input type="text" name="studentid" id="matricNo" class="form-control" placeholder="Student ID" required="" autofocus="">
+            <form method="POST" action="StaffLogin" class="signin" onsubmit="return validateLogin()">
+                <h2 class = "signin-heading">Staff Member Login</h2>
+                <input type="text" name="staffid" id="staffID" class="form-control" placeholder="Staff ID" required="" autofocus="">
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 <p id ="output"></p>
+                <p style="color:red;">username or password is wrong, try again</p>
             </form>
         </div>
     </body>
