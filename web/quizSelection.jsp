@@ -38,5 +38,23 @@
               </ul>
             </div>
        </nav>
+        
+        <div class = "container">
+               <h2>Select a Module</h2>
+                       <form name="moduleform" form method ="POST" action ="SelectModule" onsubmit="return validateModule()">
+                            <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
+                            <input id = "question" type="text"  name="module" class ="form-control" placeholder="Enter Module Here">
+                            </div>
+ 
+                <h2>Enter Quiz Name</h2>
+                <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                            <input id = "question" type="text"  name="quiz_name" class ="form-control" placeholder="Enter Quiz Name Here">
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Confirm</button>
+                            <p id = "module"></p>
+                            </form>
+        </div>
     </body>
 </html>
