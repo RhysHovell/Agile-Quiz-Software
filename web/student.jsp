@@ -73,18 +73,22 @@
         <p> No Quizzes Available </p>
         <%  } else {
 
-            String x = "";
-            String y = "";
+            String quizID = "";
+            String quizName = "";
 
         %>
         <p> Available Quizzes: </p>
         <%    for (int i = 0; i < quizList.get(0).size(); i++) {
-                x = quizList.get(0).get(i).toString();
-                y = quizList.get(1).get(i).toString();
+                quizID = quizList.get(0).get(i).toString();
+                quizName = quizList.get(1).get(i).toString();
         %>
-        <p> QuizID: <%=x%>  </p>
-        <p> Quiz Name: <%=y%>  </p>
-        <p>- - - - - - - - - - - - - - - - - - - - - - - - </p>
+        <p> Quiz ID: <%=quizID%>  </p>
+        <p> Quiz Name: <%=quizName%>  </p>
+        <form method="POST" action="LoadQuiz">
+            <input type="hidden" name="quizID" id="quizID" value="<%=quizID%>">
+            <button class="btn-lg" type="submit">Load Quiz</button>            
+        </form>
+        <p> </p>
         <%
 
                 }
