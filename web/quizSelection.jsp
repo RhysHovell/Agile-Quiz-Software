@@ -4,6 +4,8 @@
     Author     : Adam
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="AgileQuiz.stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,5 +40,39 @@
               </ul>
             </div>
        </nav>
+        <%
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+
+            List<List<String>> quiz = (List<List<String>>) session.getAttribute("quiz");
+            List<String> questions = quiz.get(0);
+            List<String> answers = quiz.get(1);
+            
+            if (quiz == null) {
+        %>
+        <p> Quiz failed to load </p>
+        <%  } else {
+            int marker=0;
+            for(int i=0; i<questions.size(); i++){
+                String Question = questions.get(i);
+                //display question
+                %>
+                <p><%=i%>. <%=Question%><p>
+                <%
+                for (int u=marker; u<(marker+5); u++){
+                //display answer option
+                String answer = answers.get(u).toString();
+                %>
+                <p><%=u%>. <%=answer%><p>
+                <%
+                
+                }
+                marker +=5;
+
+            }
+         }
+            
+            
+
+        %>
     </body>
 </html>
