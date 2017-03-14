@@ -118,7 +118,7 @@
 
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-ok"role ="button"></i></span>
-                <input id="answerOne" type="text" class="form-control" name="correct_answer" placeholder="Enter Answer One Here">
+                <input id="answerOne" type="text" class="form-control" name="correct_answer" placeholder="Enter The Correct Answer Here">
             </div>
 
             <div class="input-group">
