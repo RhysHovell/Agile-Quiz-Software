@@ -122,17 +122,17 @@
             </div>
 
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"role ="button"></i></span>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove"role ="button"></i></span>
                 <input id="answerTwo" type="text" class="form-control" name="answer_two" placeholder="Enter Answer Two Here">
             </div>
 
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"role ="button"></i></span>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove"role ="button"></i></span>
                 <input id="answerThree" type="text" class="form-control" name="answer_three" placeholder="Enter Answer Three Here">
             </div>
 
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-ok" role ="button"></i></span>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove" role ="button"></i></span>
                 <input id="answerFour" type="text" class="form-control" name="answer_four" placeholder="Enter Answer Four Here">
             </div>
             <input type ="submit" name ="question" value ="Add Question">
