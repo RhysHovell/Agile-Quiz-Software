@@ -75,6 +75,7 @@ public class AddQuestion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+       
         int question_num = Integer.parseInt(request.getParameter("question_number"));
         String question = request.getParameter("question_asked");
         String correct_answer = request.getParameter("correct_answer");
@@ -88,12 +89,21 @@ public class AddQuestion extends HttpServlet {
         Quiz quiz = new Quiz();
         LoggedIn lg = (LoggedIn) request.getSession().getAttribute("LoggedIn");
         int staff_id = lg.getStaffID();
-        String quiz_name = (String)request.getSession().getAttribute("Quizname");
+        String quiz_name= lg.getQuizName();
         // need to implement storage of current quiz and staff id as session variables
+        
         
         int quizid= quiz.GetQuizID(quiz_name, staff_id);
         quiz.NewQuestion(quizid, question_num, question);
         
+        
+        int questionid = quiz.getQuestionID(quizid, question);
+        quiz.newAnswer(questionid, correct_answer , 1);
+        quiz.newAnswer(questionid, answer2 , 0);
+        quiz.newAnswer(questionid, answer3  , 0);
+        quiz.newAnswer(questionid, answer4  , 0);
+      
+        response.sendRedirect("/AgileQuizSoftware/addQuestion.jsp");
     }
 
     /**

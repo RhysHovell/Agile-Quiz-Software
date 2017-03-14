@@ -28,7 +28,7 @@ public class Quiz {
         Connection conn = null;
 
         try {
-            String myDriver = "com.mysql.jbdc.Driver";
+            String myDriver = "com.mysql.jdbc.Driver";
             String myURL = "jdbc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");
@@ -73,7 +73,7 @@ public class Quiz {
         int quizid = 0;
         if (conn != null) {
             try {
-                String query = "SELECT QuizID FROM Quiz WHERE QuizName=? AND staff_ID=?;";
+                String query = "SELECT QuizID FROM quiz WHERE QuizName=? AND StaffID=?;";
 
                 ps = conn.prepareStatement(query);
                 ps.setString(1, quiz_name);
@@ -107,12 +107,51 @@ public class Quiz {
         return quizid;
     }
 
-    public boolean NewQuestion(int question_number, int quiz_id, String question) {
+    public int getQuestionID (int quizid , String question)
+    {
+         int question_id=0;
+         Connection conn=  ConnectToDB();
+         PreparedStatement ps;
+          try{
+              
+              String query = "Select QuestionID From question WHERE QuestionText=? AND QuizID=?;";
+              
+              ps=conn.prepareStatement(query);
 
+
+              ps.setString(1, question);
+              ps.setInt(2, quizid);
+               ResultSet rs= ps.executeQuery();
+               
+               while (rs.next())
+               {
+                   
+                   question_id=rs.getInt("QuestionID");
+               }
+            
+               
+              conn.close();
+          
+              return question_id;
+          }
+           
+            catch (Exception e) {
+                System.err.println(" there was an exception");
+            }
+          
+          
+                return question_id;
+    }
+    
+    
+    public boolean NewQuestion(int quiz_id, int question_number,  String question) {
+
+         Connection conn = ConnectToDB();
+            
         try {
             //Quiz quizConnect = new Quiz();
-            Connection conn = ConnectToDB();
-            String query = "INSERT INTO Question (QuizID, QuestionNo, Question) VALUES (?, ?, ?);";
+           
+            String query = "INSERT INTO question (QuizID, QuestionNo, QuestionText) VALUES (?, ?, ?);";
 
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, quiz_id);
@@ -144,6 +183,31 @@ public class Quiz {
 
     }
 
+    public boolean newAnswer (int question_id, String answer_text, int correct )
+    {
+        try{
+            Connection conn = ConnectToDB();
+            String query ="INSERT INTO answer (QuestionID, AnswerText, Correct) VALUES (?,?,?);";
+            PreparedStatement ps= conn.prepareStatement(query);
+            ps.setInt(1, question_id);
+            ps.setString(2, answer_text);  
+            ps.setInt(3,correct);
+            
+            ps.execute();
+            ps.close();
+            conn.close();
+        
+            return true;
+            }
+        
+        
+        catch (Exception e) {
+            System.err.println(" there was an SQL exception");
+        }
+
+        return false;
+          
+    }
     //Returns a list of string arraylists of all available quizes for a given module
     public List<List<String>> getQuizzes(String ModuleCode) {
 

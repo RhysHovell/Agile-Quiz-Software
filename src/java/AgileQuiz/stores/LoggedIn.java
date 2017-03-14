@@ -13,10 +13,23 @@ public class LoggedIn {
     boolean loggedIn = false;
     int matric =0;
     int staffid = 0;
+    String quiz_name;
+    
     
     public void LoggedIn(){
         
     }
+    
+    public void setQuizName(String quiz_name)
+    {
+        this.quiz_name=quiz_name;
+    }
+    
+    public String getQuizName()
+    {
+    return quiz_name;    
+    }
+    
     public void setLoggedIn(){
         loggedIn=true;
     }

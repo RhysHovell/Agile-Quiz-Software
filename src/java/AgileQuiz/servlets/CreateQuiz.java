@@ -79,7 +79,7 @@ public class CreateQuiz extends HttpServlet {
                   String quiz_name = request.getParameter("quiz_name");
                   LoggedIn lg = (LoggedIn) request.getSession().getAttribute("LoggedIn");
                    int staffid = lg.getStaffID();
-                 
+                   lg.setQuizName(quiz_name);
                    Quiz quiz = new Quiz();
                   quiz.NewQuiz(quiz_name, module, staffid);
 
