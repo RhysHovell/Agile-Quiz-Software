@@ -1,21 +1,21 @@
-package AgileQuiz.servlets;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package AgileQuiz.servlets;
 
 import AgileQuiz.libraries.DBconnection;
 import AgileQuiz.stores.LoggedIn;
+import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,64 +28,55 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author petersallai
+ * @author garygillespie
  */
-@WebServlet(urlPatterns = {"/StudentLogin"})
-public class StudentLogin extends HttpServlet {
+@WebServlet(name = "GetQuizzes", urlPatterns = {"/GetQuizzes"})
+public class GetQuizzes extends HttpServlet {
 
     /**
- +     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
- +     * methods.
- +     *
- +     * @param request servlet request
- +     * @param response servlet response
- +     * @throws ServletException if a servlet-specific error occurs
- +     * @throws IOException if an I/O error occurs
- +     */
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         try (PrintWriter out = response.getWriter()) {
-            String username = request.getParameter("studentid");
-            String password = request.getParameter("password");
-            DBconnection db = new DBconnection();
-            Connection con = db.getCon();
-            PreparedStatement ps = con.prepareStatement("Select * FROM student WHERE MatricNo = ? AND Password = ?");
-                        
-            int studentid = Integer.parseInt(username);
-            ps.setInt(1, studentid);
-            ps.setString(2, password);
+            HttpSession session = request.getSession();
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {                
-                int matric = rs.getInt("MatricNo");                
-                HttpSession session = request.getSession(true);
-                
-                LoggedIn lg = new LoggedIn();
-                lg.setLoggedIn();
-                lg.setMatric(matric);
-                
-                session.setAttribute("Welcome ", studentid);
-                session.setAttribute("LoggedIn",lg);
-                                
-                RequestDispatcher rd = request.getRequestDispatcher("student.jsp");
-                rd.include(request, response);
+            String moduleCodes = request.getParameter("ModuleCode");
+
+            if (lg.getLoggedIn()) {
+                if (lg.getMatric() != 0) {
+
+                    //Call method to retrieve student module codes****
+                    //moduleCodes = "Geography";
+
+                }
             }
-            else{
-                RequestDispatcher rd = request.getRequestDispatcher("/studentLoginError.jsp");
-                rd.include(request, response);
-                out.close();
+
+            Quiz qm = new Quiz();
+            List<List<String>> quizList = qm.getQuizzes(moduleCodes);
+            
+            if(quizList != null){
+                session.setAttribute("quizList", quizList);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("SQLException: " + ex.getMessage());
+            
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/student.jsp");
+            rd.forward(request, response);
+
+        } catch (Exception e) {
+            //output exception
         }
-        catch (Exception ex) {
-            System.out.println("Exception: " + ex.getMessage());
-        }
+
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -113,6 +104,7 @@ public class StudentLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

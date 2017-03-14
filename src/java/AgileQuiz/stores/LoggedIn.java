@@ -24,6 +24,10 @@ public class LoggedIn {
         loggedIn=false;
     }
     
+    public boolean getLoggedIn(){
+        return loggedIn;
+    }
+    
     public int getStaffID()
     {
         return staffid;
