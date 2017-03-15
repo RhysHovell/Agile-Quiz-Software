@@ -197,5 +197,61 @@ public class Quiz {
         return null;
 
     }
+    
+    //Returns a list of string arraylists of all available quizes for a given module
+    public List<List<String>> getResults(String ModuleCode) {
+
+        //List which stores a list of quiz names & a list of quizIDs 
+        List<List<String>> ResultList = new ArrayList<>();
+        List<String> studentScores = new ArrayList<>();
+        List<String> quizName = new ArrayList<>();
+        List<String> moduleID = new ArrayList<>();
+        
+        PreparedStatement ps;
+        Connection conn = ConnectToDB();
+
+        if (conn != null) {
+            try {
+                String query = "select Quiz.QuizName, Quiz.ModuleCode, studentsubmission.Score From Quiz INNER JOIN studentsubmission ON Quiz.QuizID = studentsubmission.QuizID;";
+
+                ps = conn.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                
+                if(!rs.isBeforeFirst()){
+                    return null;
+                }
+                
+                int i = 0;                
+                while(rs.next()){
+                    String NameOfQuiz = rs.getString("QuizName");
+                    String Score = rs.getString("Score");
+                    String Module = rs.getString("ModuleCode");
+                    
+                    studentScores.add(Score);
+                    quizName.add(NameOfQuiz); 
+                    moduleID.add(Module);
+                                                            
+                    i++;
+                }
+                
+                ps.close();
+                conn.close();
+                
+                
+                ResultList.add(quizName);
+                ResultList.add(studentScores);
+                ResultList.add(moduleID);
+                
+                return ResultList;
+
+            } catch (Exception e) {
+
+            }
+
+        }
+        
+        return null;
+
+    }
 
 }
