@@ -12,11 +12,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  *
  * @author rhyshovell
  */
+@RunWith(value=Parameterized.class)
 public class StudentTest {
     
     public StudentTest() {
@@ -80,4 +83,36 @@ public class StudentTest {
         assertEquals(expResult, result); 
     }
      */
+    
+    @Test
+    public void testThatStudenGradeIsEqualToA(){
+        Student student = new Student();
+        student.specifyGrade(78);
+        assertEquals('B', student.grade);
+    }
+    @Test
+    public void testThatStudenGradeIsEqualToB(){
+        Student student = new Student();
+        student.specifyGrade(65);
+        assertEquals('B', student.grade);
+    }
+    @Test
+    public void testThatStudenGradeIsEqualToC(){
+        Student student = new Student();
+        student.specifyGrade(52);
+        assertEquals('C', student.grade);
+    }
+    @Test
+    public void testThatStudenGradeIsEqualToD(){
+        Student student = new Student();
+        student.specifyGrade(42);
+        assertEquals('D', student.grade);
+    }
+    @Test
+    public void testThatStudenGradeIsEqualToFail(){
+        Student student = new Student();
+        student.specifyGrade(21); 
+        assertEquals('F', student.grade);
+    }
+    
 }
