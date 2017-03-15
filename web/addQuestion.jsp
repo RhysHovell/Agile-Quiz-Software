@@ -104,7 +104,7 @@
  
                             </form>
                        </div>-->
-    <div class ="container-hide">
+    <div class ="container">
         <h2>Create Question</h2>
         <form name="questionform" form method ="POST" action ="AddQuestion" onsubmit="return validateQuestion()">
         
@@ -140,7 +140,7 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Add Question</button>
             <button class="btn btn-lg btn-primary btn-block" onclick="document.location.href='createQuiz.jsp';" name="stop">Finish Adding Question</button>
             <p id = "question"></p>
+            </form>
         </div>
-        </form>
     </body>
 </html>
