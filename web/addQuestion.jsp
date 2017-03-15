@@ -64,7 +64,9 @@
             {
                 document.getElementById("question").style.display="block";
             }
-</script>
+    </script>
+    
+
         
         <title>JSP Page</title>
     </head>
@@ -135,7 +137,8 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-remove" role ="button"></i></span>
                 <input id="answerFour" type="text" class="form-control" name="answer_four" placeholder="Enter Answer Four Here">
             </div>
-            <input type ="submit" name ="question" value ="Add Question">
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Add Question</button>
+            <button class="btn btn-lg btn-primary btn-block" onclick="document.location.href='createQuiz.jsp';" name="stop">Finish Adding Question</button>
             <p id = "question"></p>
         </div>
         </form>
