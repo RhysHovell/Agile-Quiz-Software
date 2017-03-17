@@ -136,9 +136,5 @@ public class Student {
         return grade;
     }
     
-    @Test
-    public void testThatStudenGradeIsEqualToA(){
-        assertEquals('A', grade);
-    }
      
 }

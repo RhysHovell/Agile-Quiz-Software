@@ -208,6 +208,58 @@ public class Quiz {
         return false;
           
     }
+//    
+//    public boolean getQuestion(String QuestionNumber)
+//    {
+//       PreparedStatement ps;
+//       Connection conn = ConnectToDB();
+//       
+//       if (conn != null) {
+//            try {
+//                String query = "SELECT AnswerID, QuestionID, AnswerText, Correct FROM Quiz WHERE QuestionNumber=?";
+//                
+//                
+//                ps = conn.prepareStatement(query);
+//                
+//                ResultSet rs = ps.executeQuery();
+//                
+//                int i = 0;                
+//                
+//                for (Row row : rs){
+//                    QuestionNumber.setAnswerID(row.getInt("AnswerID"));
+//                    QuestionNumber.setQuestionID(row.getInt("QuestionID"));
+//                    QuestionNumber.setAnswerText(row.getString("AnswerText"));
+//                    QuestionNumber.setCorrectAnswer(row.getString("Correct"));
+//                    
+//                    
+//                    
+//                    
+//                    
+//                    
+//                }
+//                
+//                ps.close();
+//                conn.close();
+//                
+//                
+//                quizList.add(quizIDs);
+//                quizList.add(quizNames);
+//                
+//                return quizList;
+//
+//            } catch (Exception e) {
+//
+//            }
+//
+//        }
+//        
+//        return null;
+//
+//       
+//       
+//        
+//       
+//    }
     //Returns a list of string arraylists of all available quizes for a given module
     public List<List<String>> getQuizzes(String ModuleCode) {
 

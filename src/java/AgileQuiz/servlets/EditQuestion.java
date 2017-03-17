@@ -5,8 +5,6 @@
  */
 package AgileQuiz.servlets;
 
-import AgileQuiz.stores.LoggedIn;
-import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author brodieross
+ * @author rhyshovell
  */
-@WebServlet(name = "CreateQuiz", urlPatterns = {"/CreateQuiz"})
-public class CreateQuiz extends HttpServlet {
+@WebServlet(name = "EditQuestion", urlPatterns = {"/EditQuestion"})
+public class EditQuestion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class CreateQuiz extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateQuiz</title>");            
+            out.println("<title>Servlet EditQuestion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreateQuiz at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditQuestion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,19 +72,15 @@ public class CreateQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                 //  processRequest(request, response);
-                  String module = request.getParameter("module");
-                  String quiz_name = request.getParameter("quiz_name");
-                  LoggedIn lg = (LoggedIn) request.getSession().getAttribute("LoggedIn");
-                  int staffid = lg.getStaffID();
-                  lg.setQuizName(quiz_name);
-                  Quiz quiz = new Quiz();
-                  quiz.NewQuiz(quiz_name, module, staffid);
-
-                  response.sendRedirect("/AgileQuizSoftware/addQuestion.jsp");
-    
-                                                   }
-
+        processRequest(request, response);
+        String question = request.getParameter("question_asked");
+        String correct_answer = request.getParameter("correct_answer");
+        String answer2 = request.getParameter("answer_two");
+        String answer3 = request.getParameter("answer_three");
+        String answer4 = request.getParameter("answer_four");
+        
+        
+    }
     /**
      * Returns a short description of the servlet.
      *
@@ -96,5 +90,5 @@ public class CreateQuiz extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+     
 }
