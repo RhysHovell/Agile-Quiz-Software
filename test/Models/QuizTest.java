@@ -49,7 +49,6 @@ public class QuizTest {
         Connection expResult = null;
         Connection result = instance.ConnectToDB();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
  ;
     }
 
@@ -66,7 +65,7 @@ public class QuizTest {
         boolean expResult = false;
         boolean result = instance.NewQuiz(quiz_name, module, staff_ID);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+      
     }
 
     /**
