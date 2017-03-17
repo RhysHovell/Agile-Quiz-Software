@@ -88,7 +88,7 @@ public class StudentTest {
     public void testThatStudenGradeIsEqualToA(){
         Student student = new Student();
         student.specifyGrade(78);
-        assertEquals('B', student.grade);
+        assertEquals('A', student.grade);
     }
     @Test
     public void testThatStudenGradeIsEqualToB(){
