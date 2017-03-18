@@ -5,33 +5,20 @@
  */
 package AgileQuiz.servlets;
 
-import AgileQuiz.libraries.DBconnection;
-import AgileQuiz.stores.LoggedIn;
-import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author garygillespie
+ * @author Brodie
  */
-@WebServlet(name = "GetQuizzes", urlPatterns = {"/GetQuizzes"})
-public class GetQuizzes extends HttpServlet {
+@WebServlet(name = "ViewQuiz", urlPatterns = {"/ViewQuiz"})
+public class ViewQuiz extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,53 +31,7 @@ public class GetQuizzes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-            
-            String moduleCodes = request.getParameter("ModuleCode");
-
-            if (lg.getLoggedIn()) {
-                if (lg.getMatric() != 0) {
-
-                    //Call method to retrieve student module codes****
-                    //moduleCodes = "Geography";
-
-                }
-            }
-
-            Quiz qm = new Quiz();
-            List<List<String>> quizList = qm.getQuizzes(moduleCodes);
-            
-            if(quizList != null){
-                session.setAttribute("quizList", quizList);
-            }
-            
-            if (lg.getStaffID()!= 0 )
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("/quizSelection.jsp");
-                rd.forward(request, response);
-            }
-            else if (lg.getMatric() != 0) 
-            
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("/student.jsp");
-               rd.forward(request, response);
-            }
-          
-            else 
-       
-            {
-                   RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");   
-            }
-            
-            
-            
-        } catch (Exception e) {
-            //output exception
-        }
-
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -119,8 +60,25 @@ public class GetQuizzes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-
+        
+   
+       //String selected_quiz= request.getParameter("selected_quiz"); 
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ViewQuiz</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ViewQuiz at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+            out.println(request.getParameter("selected_quiz"));
+        }
+       
+    
     }
 
     /**

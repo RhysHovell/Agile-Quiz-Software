@@ -63,7 +63,7 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
             <p id ="output"></p>
         </form>
-        <form method="POST" action="ViewQuiz">
+       
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
 
@@ -82,10 +82,12 @@
         <%    for (int i = 0; i < quizList.get(0).size(); i++) {
                 x = quizList.get(0).get(i).toString();
                 y = quizList.get(1).get(i).toString();
-        %>
+                //String button_name= "button"+i; 
+%>
         <p> QuizID: <%=x%>  </p>
         <p> Quiz Name: <%=y%>  </p>
-        <button type="submit"><%=y%></button>
+         <form method="POST" action="ViewQuiz">
+        <button type="submit" name="selected_quiz" value="<%=y%>" >Edit This Quiz</button>
         <p>- - - - - - - - - - - - - - - - - - - - - - - - </p>
         </form>
         <%
