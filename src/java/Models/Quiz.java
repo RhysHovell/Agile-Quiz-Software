@@ -313,5 +313,128 @@ public class Quiz {
         return null;
 
     }
+    
+    public List<List<String>> loadQuiz(String quizID) {
+        //List which contains 3 lists i)Questions ii)Answers iii)Explanations
+        List<List<String>> Quiz = loadQuestions(quizID);
+        
+        if(Quiz != null){
+            return Quiz;            
+        } else {
+            return null;
+        }
+
+    }
+    
+    private List<List<String>> loadQuestions (String quizID){
+        
+        List<List<String>> Quiz = new ArrayList<>();
+        List<String> questionAnswerSet = new ArrayList<>();
+        
+        List<String> questions = new ArrayList<>();
+        
+        PreparedStatement ps;
+        Connection conn = ConnectToDB();
+        
+        if (conn != null) {
+            try {
+                String query = "SELECT QuestionID, QuestionText FROM Question WHERE QuizID =?";
+
+                ps = conn.prepareStatement(query);
+                ps.setString(1, quizID);
+
+                ResultSet rs = ps.executeQuery();
+                
+                if (!rs.isBeforeFirst()) {
+                    return null;
+                }
+                
+                while (rs.next()) {
+                    String question = rs.getString("QuestionText");
+                    int questionID = rs.getInt("QuestionID");
+                    
+                    List<String> answers = loadAnswers(questionID);
+                    
+                    questionAnswerSet.add(question);
+                    questionAnswerSet.addAll(answers);
+                    
+                    Quiz.add(new ArrayList<>(questionAnswerSet));
+                    
+                    questionAnswerSet.clear();
+                    
+                }
+
+                ps.close();
+                conn.close();
+                
+                return Quiz;
+
+            } catch (Exception e) {
+                
+                return null;
+
+            }
+
+        }
+        
+        return null;
+    }
+    
+    private List<String> loadAnswers (int questionID){
+        
+        List<String> answers = new ArrayList<>();
+        List<String> correctAnswer = new ArrayList<>();
+        
+        PreparedStatement ps;
+        Connection conn = ConnectToDB();
+        
+        if (conn != null) {
+            try {
+                String query = "SELECT AnswerText, Correct FROM answer WHERE QuestionID =?";
+
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, questionID);
+
+                ResultSet rs = ps.executeQuery();
+                
+                if (!rs.isBeforeFirst()) {
+                    return null;
+                }
+                
+                
+                int questionCount = 0;
+                while (rs.next()) {
+                    String answer = rs.getString("AnswerText");
+                    int correct = rs.getInt("Correct");
+                    
+                    if(correct == 1){
+                        correctAnswer.add(answer);
+                        questionCount++;
+                    }                    
+                    answers.add(answer);
+                    
+                }
+
+                ps.close();
+                conn.close();
+                
+                //Iterate through the entire correctAnswer list and insert the correct answerID at every 5th index of the answers list(after each set of 4 answers)
+                for(int i=0; i<questionCount; i++){
+                    answers.add((i*5),correctAnswer.get(i));
+                }
+                
+                
+                return answers;
+
+            } catch (Exception e) {
+                
+                return null;
+
+            }
+
+        }
+        
+        return null;
+    }
 
 }
