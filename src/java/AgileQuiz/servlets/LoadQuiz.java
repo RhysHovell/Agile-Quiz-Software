@@ -50,7 +50,7 @@ public class LoadQuiz extends HttpServlet {
                 session.setAttribute("quiz", quiz);
             }
                         
-            RequestDispatcher rd = request.getRequestDispatcher("/quizSelection.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/takeQuiz.jsp");
             rd.forward(request, response);
             
         } catch (Exception e){

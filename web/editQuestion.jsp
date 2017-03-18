@@ -78,22 +78,7 @@
     <body>
                
 
-      <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <a class="navbar-brand" href="#">QuizzyBoy</a>
-              </div>
-              <ul class="nav navbar-nav">
-                <li class="nav"><a href="createQuiz.jsp">Create A Quiz</a></li>
-                <li class="nav"><a href="quizSelection.jsp">Select A Quiz</a></li>
-                <li class="nav"><a href="staffLogin.jsp">Staff Login</a></li>
-                <li class="nav"><a href="studentLogin.jsp">Student Login</a></li>
-                <li class="nav"><a href="startScreen.jsp">Start Screen</a></li>
-                <li class="nav"><a href="student.jsp">Student</a></li>
-                <li class="nav"><a href="index.jsp">Home</a></li>
-              </ul>
-            </div>
-          </nav>
+     <jsp:include page="navbar.jsp"/>
         
              <!--  <h2>Add a Quiz to which Module</h2>
                        <form name="moduleform" form method ="POST" action ="Module" onsubmit="return validateModule()">

@@ -69,13 +69,13 @@ public class GetQuizzes extends HttpServlet {
             
             if (lg.getStaffID()!= 0 )
             {
-                RequestDispatcher rd = request.getRequestDispatcher("/quizSelection.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/staffSelect.jsp");
                 rd.forward(request, response);
             }
             else if (lg.getMatric() != 0) 
             
             {
-                RequestDispatcher rd = request.getRequestDispatcher("/student.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/studentSelect.jsp");
                rd.forward(request, response);
             }
           

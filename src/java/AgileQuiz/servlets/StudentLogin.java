@@ -69,7 +69,7 @@ public class StudentLogin extends HttpServlet {
                 session.setAttribute("Welcome ", studentid);
                 session.setAttribute("LoggedIn",lg);
                                 
-                RequestDispatcher rd = request.getRequestDispatcher("student.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("studentSelect.jsp");
                 rd.include(request, response);
             }
             else{

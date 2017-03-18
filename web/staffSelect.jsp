@@ -1,7 +1,7 @@
 <%-- 
-    Document   : student
-    Created on : 21-Feb-2017, 16:37:04
-    Author     : Adam
+    Document   : staffSelect
+    Created on : 18-Mar-2017, 21:15:47
+    Author     : Brodie
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -29,27 +29,12 @@
 
         <title>JSP Page</title>
     </head>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">QuizzyBoy</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="nav"><a href="createQuiz.jsp">Create A Quiz</a></li>
-                <li class="nav"><a href="quizSelection.jsp">Select A Quiz</a></li>
-                <li class="nav"><a href="staffLogin.jsp">Staff Login</a></li>
-                <li class="nav"><a href="studentLogin.jsp">Student Login</a></li>
-                <li class="nav"><a href="startScreen.jsp">Start Screen</a></li>
-                <li class="nav"><a href="student.jsp">Student</a></li>
-                <li class="nav"><a href="index.jsp">Home</a></li>
-            </ul>
-        </div>
-    </nav>
+ <jsp:include page="navbar.jsp"/>
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Student</a>
+                    <a class="navbar-brand" href="#">Staff</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="#">Modules</a></li>
@@ -63,41 +48,35 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
             <p id ="output"></p>
         </form>
+       
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-
             List<List<String>> quizList = (List<List<String>>) session.getAttribute("quizList");
-
             if (quizList == null) {
         %>
         <p> No Quizzes Available </p>
         <%  } else {
-
-            String quizID = "";
-            String quizName = "";
-
+            String x = "";
+            String y = "";
         %>
         <p> Available Quizzes: </p>
         <%    for (int i = 0; i < quizList.get(0).size(); i++) {
-                quizID = quizList.get(0).get(i).toString();
-                quizName = quizList.get(1).get(i).toString();
-        %>
-        <p> Quiz ID: <%=quizID%>  </p>
-        <p> Quiz Name: <%=quizName%>  </p>
-        <form method="POST" action="LoadQuiz">
-            <input type="hidden" name="quizID" id="quizID" value="<%=quizID%>">
-            <button class="btn-lg" type="submit">Load Quiz</button>            
+                x = quizList.get(0).get(i).toString();
+                y = quizList.get(1).get(i).toString();
+                //String button_name= "button"+i; 
+%>
+        <p> QuizID: <%=x%>  </p>
+        <p> Quiz Name: <%=y%>  </p>
+         <form method="POST" action="ViewQuiz">
+        <button type="submit" name="selected_quiz" value="<%=y%>" >Edit This Quiz</button>
+        <p>- - - - - - - - - - - - - - - - - - - - - - - - </p>
         </form>
-        <p> </p>
         <%
-
                 }
             }
             session.removeAttribute("quizList");
-
-
         %>
-
+       
 
         <%
         %>
