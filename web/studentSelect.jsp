@@ -71,7 +71,7 @@
         <p> Quiz ID: <%=quizID%>  </p>
         <p> Quiz Name: <%=quizName%>  </p>
         <form method="POST" action="LoadQuiz">
-            <input type="hidden" name="quizID" id="quizID" value="<%=quizID%>">
+            <input type="hidden" name="selected_quiz" id="quizID" value="<%=quizName%>">
             <button class="btn-lg" type="submit">Load Quiz</button>            
         </form>
         <p> </p>

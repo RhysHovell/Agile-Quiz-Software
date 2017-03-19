@@ -40,10 +40,12 @@ public class LoadQuiz extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-            
-            String quizID = request.getParameter("quizID");
-            
-            Quiz qm = new Quiz();
+                 Quiz qm = new Quiz();
+                 String selected_quiz=request.getParameter("selected_quiz");
+                 
+       int quizID = qm.GetQuizID (selected_quiz, lg.getStaffID() );
+      
+       
             List<List<String>> quiz = qm.loadQuiz(quizID);
             
             if(quiz != null){

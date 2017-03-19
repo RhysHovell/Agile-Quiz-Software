@@ -314,7 +314,7 @@ public class Quiz {
 
     }
     
-    public List<List<String>> loadQuiz(String quizID) {
+    public List<List<String>> loadQuiz(int quizID) {
         //List which contains 3 lists i)Questions ii)Answers iii)Explanations
         List<List<String>> Quiz = loadQuestions(quizID);
         
@@ -326,7 +326,7 @@ public class Quiz {
 
     }
     
-    private List<List<String>> loadQuestions (String quizID){
+    private List<List<String>> loadQuestions (int quizID){
         
         List<List<String>> Quiz = new ArrayList<>();
         List<String> questionAnswerSet = new ArrayList<>();
@@ -341,7 +341,7 @@ public class Quiz {
                 String query = "SELECT QuestionID, QuestionText FROM Question WHERE QuizID =?";
 
                 ps = conn.prepareStatement(query);
-                ps.setString(1, quizID);
+                ps.setInt(1, quizID);
 
                 ResultSet rs = ps.executeQuery();
                 
