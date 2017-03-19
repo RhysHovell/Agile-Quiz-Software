@@ -68,13 +68,19 @@ public class ViewQuiz extends HttpServlet {
         
    
        String selected_quiz= request.getParameter("selected_quiz"); 
+       int chosen_id= Integer.parseInt(request.getParameter("chosen_id"));
+       
        Quiz qm= new Quiz();
        HttpSession session = request.getSession();
        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
        
-       int quizid = qm.GetQuizID (selected_quiz, lg.getStaffID() );
+       lg.setQuizName(selected_quiz);
+       lg.setQuizID(chosen_id);
+       
+       session.setAttribute("Loggedin", lg);
+    //   int quizid = qm.GetQuizID (selected_quiz, lg.getStaffID() );
       
-       List<List<String>>  Quiz= qm.loadQuiz(quizid);
+       List<List<String>>  Quiz= qm.loadQuiz(chosen_id);
        
        
        session.setAttribute("quiz",Quiz);

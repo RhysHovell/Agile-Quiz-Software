@@ -28,6 +28,9 @@
     <body>
   <jsp:include page="navbar.jsp"/>
   
+  <div class ="container">
+        <h2>Edit Questions</h2>
+  
       <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
 
@@ -59,18 +62,68 @@ for (int i=0; i < quiz.size(); i++) {
             answer4 = quiz.get(i).get(5);
              
   %>
+                 <form name="questionedit" form method ="POST" action ="EditQuestion" >
   
-  <p> Question:<%=question%></p>
-   <p> Correct Answer:<%=correct%></p>
-    <p> Second Answer:<%=answer2%></p>
-     <p> Third Answer:<%=answer3%></p>
-     <p> Fourth Answer:<%=answer4%></p>
-       <p> </p>
-    
+                     
+                     <input type="hidden" name="current_question" value="<%=question%>>"
+                     <input type="hidden" name="current_correct" value="<%=correct%>>"
+                     <input type="hidden" name="current2" value="<%=answer2%>>"
+                     <input type="hidden" name="current3" value="<%=answer3%>>"
+                     <input type="hidden" name="current4" value="<%=answer4%>>"
+                   
+                                                        
+                     
+                     
+                     <p> Question: <%=question%></p>
+   <div class="input-group">
+                  
+                   <nbsp></nbsp>
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
+                  <input id = "question" type="text"  name="question_asked" class ="form-control" placeholder="Enter Question Edit Here">
+  </div>
+   <br>
+  
+    <p>  Correct Answer: <%=correct%></p>  
+   <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"role ="button"></i></span>
+                <input id="answerOne" type="text" class="form-control" name="correct_answer" placeholder="Enter The Correct Answer Edit Here">
+            </div>
+            <br>
+            
+    <p> Second Answer: <%=answer2%></p>
+    <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove"role ="button"></i></span>
+                <input id="answerTwo" type="text" class="form-control" name="answer_two" placeholder="Enter Answer Two Edit Here">
+            </div>
+            <br>
+            
+     <p> Third Answer: <%=answer3%></p>
+     <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove"role ="button"></i></span>
+                <input id="answerThree" type="text" class="form-control" name="answer_three" placeholder="Enter Answer Three Edit Here">
+            </div>
+            <br>
+     
+     <p> Fourth Answer: <%=answer4%></p>
+         <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove" role ="button"></i></span>
+                <input id="answerFour" type="text" class="form-control" name="answer_four" placeholder="Enter Answer Four Edit Here">
+            </div>
+         <br>
+         
+         <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Update Question</button>
+         <hr>
+           
+            </form>
+
        <%
         } 
+%>
+      <button class="btn btn-lg btn-primary btn-block" onclick="document.location.href='staffSelect.jsp';" name="stop">Finish Editing</button>
+
+<%
 }
      %>
-   
+  </div>
     </body>
      </html>

@@ -437,4 +437,12 @@ public class Quiz {
         return null;
     }
 
+    public void editQuestion(int question_id, String Question)
+    {
+        
+    }
+    
+    
+    
+    
 }

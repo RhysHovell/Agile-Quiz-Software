@@ -14,7 +14,7 @@ public class LoggedIn {
     int matric =0;
     int staffid = 0;
     String quiz_name;
-    
+    int quiz_id;
     
     public void LoggedIn(){
         
@@ -29,6 +29,21 @@ public class LoggedIn {
     {
     return quiz_name;    
     }
+    
+    
+    public void setQuizID(int quiz_id)
+    {
+        this.quiz_id= quiz_id;
+         
+    }
+    
+    public int getQuizID()
+    {
+        return quiz_id;
+        
+    }
+    
+    
     
     public void setLoggedIn(){
         loggedIn=true;

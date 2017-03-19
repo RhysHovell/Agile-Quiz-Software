@@ -5,6 +5,8 @@
  */
 package AgileQuiz.servlets;
 
+import AgileQuiz.stores.LoggedIn;
+import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -73,13 +76,29 @@ public class EditQuestion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+         HttpSession session = request.getSession();
+       LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+       
+        int quiz_id= lg.getQuizID();
+        
+        String current_question = request.getParameter("current_question");
+        String current_correct = request.getParameter("current_correct");
+        String current2 = request.getParameter("current2");
+        String current3 = request.getParameter("current3");
+        String current4 = request.getParameter("current4");
+         
         String question = request.getParameter("question_asked");
         String correct_answer = request.getParameter("correct_answer");
         String answer2 = request.getParameter("answer_two");
         String answer3 = request.getParameter("answer_three");
         String answer4 = request.getParameter("answer_four");
         
+        Quiz qm= new Quiz();
         
+        int question_id =  qm.getQuestionID(quiz_id,current_question);
+        
+        qm.editQuestion(question_id,question);
     }
     /**
      * Returns a short description of the servlet.

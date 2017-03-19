@@ -68,6 +68,8 @@
         <p> QuizID: <%=x%>  </p>
         <p> Quiz Name: <%=y%>  </p>
          <form method="POST" action="ViewQuiz">
+         
+         <input type=hidden" name="chosen_id"  value="<%=x%>" >
         <button type="submit" name="selected_quiz" value="<%=y%>" >Edit This Quiz</button>
         <p>- - - - - - - - - - - - - - - - - - - - - - - - </p>
         </form>
