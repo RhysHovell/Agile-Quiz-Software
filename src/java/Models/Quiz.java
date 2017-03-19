@@ -143,6 +143,47 @@ public class Quiz {
                 return question_id;
     }
     
+    public int getAnswerID(int question_id, String answer)
+    {
+           int answer_id=0;
+         Connection conn=  ConnectToDB();
+         PreparedStatement ps;
+          try{
+              
+              String query = "Select AnswerID From answer WHERE AnswerText=? AND QuestionID=?;";
+              
+              ps=conn.prepareStatement(query);
+
+
+              ps.setInt(2, question_id);
+              ps.setString(1, answer);
+               ResultSet rs= ps.executeQuery();
+               
+               while (rs.next())
+               {
+                   
+                   answer_id=rs.getInt("AnswerID");
+               }
+            
+               
+              conn.close();
+          
+              return answer_id;
+          }
+           
+            catch (Exception e) {
+                System.err.println(" there was an exception");
+            }
+          
+          
+                return answer_id;
+        
+        
+        
+        
+    }
+    
+    
     
     public boolean NewQuestion(int quiz_id, int question_number,  String question) {
 
@@ -437,11 +478,63 @@ public class Quiz {
         return null;
     }
 
-    public void editQuestion(int question_id, String Question)
+    public boolean editQuestion(int question_id, String question)
     {
-        
+ 
+        Connection conn = ConnectToDB();
+            
+        try {
+            //Quiz quizConnect = new Quiz();
+           
+            String query = "UPDATE question SET QuestionText =?   WHERE QuestionID=?;";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, question);
+            ps.setInt(2, question_id);
+            
+
+            ps.execute();
+            ps.close();
+
+           
+            conn.close();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(" there was an SQL exception");
+        }
+        return false;
     }
-    
+   
+     public boolean editAnswer(int answer_id, String answer)
+    {
+ 
+        Connection conn = ConnectToDB();
+            
+        try {
+            //Quiz quizConnect = new Quiz();
+           
+            String query = "UPDATE answer SET AnswerText =?   WHERE AnswerID=?;";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, answer);
+            ps.setInt(2, answer_id);
+            
+
+            ps.execute();
+            ps.close();
+
+           
+            conn.close();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(" there was an SQL exception");
+        }
+        return false;
+    }
     
     
     

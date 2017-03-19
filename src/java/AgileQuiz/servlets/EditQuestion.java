@@ -9,6 +9,8 @@ import AgileQuiz.stores.LoggedIn;
 import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -75,7 +77,7 @@ public class EditQuestion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+     
         
          HttpSession session = request.getSession();
        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
@@ -97,8 +99,48 @@ public class EditQuestion extends HttpServlet {
         Quiz qm= new Quiz();
         
         int question_id =  qm.getQuestionID(quiz_id,current_question);
+        int answer_id_correct = qm.getAnswerID(question_id, current_correct);
+        int answer_id2 = qm.getAnswerID(question_id, current2);
+        int answer_id3 = qm.getAnswerID(question_id, current3);
+        int answer_id4 = qm.getAnswerID(question_id, current4);
         
-        qm.editQuestion(question_id,question);
+        if(current_question!=null)
+            {
+                    qm.editQuestion(question_id,question);
+            }
+        
+        if (correct_answer!=null)
+           {
+                    qm.editAnswer(answer_id_correct,correct_answer);
+            
+            }
+         if (answer2!=null)
+           {
+                    qm.editAnswer(answer_id2,answer2);
+            
+            }
+          if (answer3!=null)
+           {
+                    qm.editAnswer(answer_id3,answer3);
+            
+            }
+           if (answer4!=null)
+           {
+                    qm.editAnswer(answer_id4,answer4);
+            
+            }
+        
+           List<List<String>>  Quiz= qm.loadQuiz(quiz_id);
+       
+       
+            session.setAttribute("quiz",Quiz);
+           
+           
+               RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
+               rd.forward(request, response);
+    
+        
+        
     }
     /**
      * Returns a short description of the servlet.

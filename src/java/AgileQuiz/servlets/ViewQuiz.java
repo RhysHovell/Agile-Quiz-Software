@@ -66,20 +66,28 @@ public class ViewQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-   
+       
        String selected_quiz= request.getParameter("selected_quiz"); 
        int chosen_id= Integer.parseInt(request.getParameter("chosen_id"));
        
-       Quiz qm= new Quiz();
+       
        HttpSession session = request.getSession();
        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
        
-       lg.setQuizName(selected_quiz);
-       lg.setQuizID(chosen_id);
        
-       session.setAttribute("Loggedin", lg);
+       lg.setQuizName(selected_quiz);
+      
+    
+     
+       lg.setQuizID(chosen_id);
+      session.setAttribute("Loggedin", lg);
+  
+       
+       
     //   int quizid = qm.GetQuizID (selected_quiz, lg.getStaffID() );
       
+         Quiz qm= new Quiz();
+    
        List<List<String>>  Quiz= qm.loadQuiz(chosen_id);
        
        

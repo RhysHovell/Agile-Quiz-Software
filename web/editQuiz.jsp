@@ -65,11 +65,11 @@ for (int i=0; i < quiz.size(); i++) {
                  <form name="questionedit" form method ="POST" action ="EditQuestion" >
   
                      
-                     <input type="hidden" name="current_question" value="<%=question%>>"
-                     <input type="hidden" name="current_correct" value="<%=correct%>>"
-                     <input type="hidden" name="current2" value="<%=answer2%>>"
-                     <input type="hidden" name="current3" value="<%=answer3%>>"
-                     <input type="hidden" name="current4" value="<%=answer4%>>"
+                     <input type="hidden" name="current_question" value="<%=question%>">
+                     <input type="hidden" name="current_correct" value="<%=correct%>">
+                     <input type="hidden" name="current2" value="<%=answer2%>">
+                     <input type="hidden" name="current3" value="<%=answer3%>">
+                     <input type="hidden" name="current4" value="<%=answer4%>">
                    
                                                         
                      
