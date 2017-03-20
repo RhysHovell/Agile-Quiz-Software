@@ -65,14 +65,15 @@
                 y = quizList.get(1).get(i).toString();
                 //String button_name= "button"+i; 
 %>
-        <p> QuizID: <%=x%>  </p>
+      <!--  <p> QuizID: <%=x%>  </p>-->
         <p> Quiz Name: <%=y%>  </p>
-         <form method="POST" action="ViewQuiz">
+         <form name="gotoedit" method="POST" action="ViewQuiz">
          
-         <input type=hidden" name="chosen_id"  value="<%=x%>" >
+         <input type="hidden" name="chosen_id"  value="<%=x%>" >
         <button type="submit" name="selected_quiz" value="<%=y%>" >Edit This Quiz</button>
-        <p>- - - - - - - - - - - - - - - - - - - - - - - - </p>
+        <hr>
         </form>
+       
         <%
                 }
             }

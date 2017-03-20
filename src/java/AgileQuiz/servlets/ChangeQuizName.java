@@ -9,7 +9,6 @@ import AgileQuiz.stores.LoggedIn;
 import Models.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brodie
  */
-@WebServlet(name = "ViewQuiz", urlPatterns = {"/ViewQuiz"})
-public class ViewQuiz extends HttpServlet {
+@WebServlet(name = "ChangeQuizName", urlPatterns = {"/ChangeQuizName"})
+public class ChangeQuizName extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +35,19 @@ public class ViewQuiz extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ChangeQuizName</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ChangeQuizName at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,37 +76,17 @@ public class ViewQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    HttpSession session= request.getSession();
+        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         
-       
-       String selected_quiz= request.getParameter("selected_quiz"); 
-       int chosen_id= Integer.parseInt(request.getParameter("chosen_id"));
-       
-       
-       HttpSession session = request.getSession();
-       LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-      
-       
-       lg.setQuizName(selected_quiz);
-      
-    
-     
-       lg.setQuizID(chosen_id);
-      session.setAttribute("Loggedin", lg);
-  
-       
-       
-    //   int quizid = qm.GetQuizID (selected_quiz, lg.getStaffID() );
-      
-         Quiz qm= new Quiz();
-    
-       List<List<String>>  Quiz= qm.loadQuiz(chosen_id);
-       
-       
-       session.setAttribute("quiz",Quiz);
-       
-            RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
+        String quiz_name = request.getParameter("quiz_name");
+        int quiz_id= lg.getQuizID();
+        Quiz qm = new Quiz();
+        
+        qm.editQuizName(quiz_id, quiz_name);
+        
+           RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
                rd.forward(request, response);
-    
     }
 
     /**

@@ -104,27 +104,27 @@ public class EditQuestion extends HttpServlet {
         int answer_id3 = qm.getAnswerID(question_id, current3);
         int answer_id4 = qm.getAnswerID(question_id, current4);
         
-        if(current_question!=null)
+        if(question!="")
             {
                     qm.editQuestion(question_id,question);
             }
         
-        if (correct_answer!=null)
+        if (correct_answer!="")
            {
                     qm.editAnswer(answer_id_correct,correct_answer);
             
             }
-         if (answer2!=null)
+         if (answer2!="")
            {
                     qm.editAnswer(answer_id2,answer2);
             
             }
-          if (answer3!=null)
+          if (answer3!="")
            {
                     qm.editAnswer(answer_id3,answer3);
             
             }
-           if (answer4!=null)
+           if (answer4!="")
            {
                     qm.editAnswer(answer_id4,answer4);
             

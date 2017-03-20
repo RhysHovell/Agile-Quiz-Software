@@ -29,8 +29,37 @@
   <jsp:include page="navbar.jsp"/>
   
   <div class ="container">
-        <h2>Edit Questions</h2>
-  
+        <h2>Edit Your Quiz here</h2>
+        
+             
+             <h2>Change This Quiz's Module</h2>
+                       <form name="moduleform" form method ="POST" action ="ChangeModule" ">
+                            <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
+                            <input id = "question" type="text"  name="module" class ="form-control" placeholder="Enter New Module Here">
+                            </div>
+                           <br>
+                           <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Update module</button>
+                       </form>                
+                     <hr>
+                           
+                           
+                <h2>Change Your Quiz's Name</h2>
+                
+                            <form name="nameform" form method ="POST" action ="ChangeQuizName" ">
+                                <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                            <input id = "question" type="text"  name="quiz_name" class ="form-control" placeholder="Enter Quiz Name Here">
+                            </div>
+                <br>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Update name </button>
+                            </form>
+                            
+                            <hr>
+             
+                         
+        
+        
       <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
 

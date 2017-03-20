@@ -536,6 +536,61 @@ public class Quiz {
         return false;
     }
     
+     public boolean editModule(int quiz_id, String module)
+     {
+           Connection conn = ConnectToDB();
+            
+        try {
+     
+           
+            String query = "UPDATE quiz SET ModuleCode =?   WHERE QuizID=?;";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, module);
+            ps.setInt(2, quiz_id);
+            
+
+            ps.execute();
+            ps.close();
+
+           
+            conn.close();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(" there was an SQL exception");
+        }
+        return false; 
+     }
+    
+       public boolean editQuizName(int quiz_id, String quiz_name)
+     {
+           Connection conn = ConnectToDB();
+            
+        try {
+            
+           
+            String query = "UPDATE quiz SET QuizName =?   WHERE QuizID=?;";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, quiz_name );
+            ps.setInt(2, quiz_id);
+            
+
+            ps.execute();
+            ps.close();
+
+           
+            conn.close();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(" there was an SQL exception");
+        }
+        return false; 
+     }
     
     
 }
