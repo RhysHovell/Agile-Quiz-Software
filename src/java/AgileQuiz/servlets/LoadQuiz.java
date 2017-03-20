@@ -40,23 +40,31 @@ public class LoadQuiz extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                 Quiz qm = new Quiz();
-                 String selected_quiz=request.getParameter("selected_quiz");
-                 
-       int quizID = qm.GetQuizID (selected_quiz, lg.getStaffID() );
-      
-       
-            List<List<String>> quiz = qm.loadQuiz(quizID);
-            
-            if(quiz != null){
-                session.setAttribute("quiz", quiz);
+            Quiz qm = new Quiz();
+            String selected_quiz = request.getParameter("selected_quiz");
+
+            if (lg.getMatric() != 0) {
+                String quizID = request.getParameter("selected_quiz_id");
+                List<List<String>> quiz = qm.loadQuiz(Integer.parseInt(quizID));
+
+                if (quiz != null) {
+                    session.setAttribute("quiz", quiz);
+                }
+
+            } else {
+                int quizID = qm.GetQuizID(selected_quiz, lg.getStaffID());
+                List<List<String>> quiz = qm.loadQuiz(quizID);
+
+                if (quiz != null) {
+                    session.setAttribute("quiz", quiz);
+                }
             }
-                        
+
             RequestDispatcher rd = request.getRequestDispatcher("/takeQuiz.jsp");
             rd.forward(request, response);
-            
-        } catch (Exception e){
-            
+
+        } catch (Exception e) {
+
         }
     }
 

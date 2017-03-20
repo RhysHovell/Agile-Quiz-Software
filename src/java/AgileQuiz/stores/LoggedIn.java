@@ -68,7 +68,7 @@ public class LoggedIn {
     public int getMatric(){
         return matric;
     }
-    public void setMatric(int name){
-        this.matric=name;
+    public void setMatric(int mat){
+        this.matric=mat;
     }
 }
