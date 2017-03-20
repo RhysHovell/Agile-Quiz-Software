@@ -7,8 +7,13 @@ package AgileQuiz.servlets;
 
 import AgileQuiz.stores.LoggedIn;
 import Models.Quiz;
+import Models.Student;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,8 +27,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author garygillespie
  */
-@WebServlet(name = "LoadQuiz", urlPatterns = {"/LoadQuiz"})
-public class LoadQuiz extends HttpServlet {
+@WebServlet(name = "SubmitQuiz", urlPatterns = {"/SubmitQuiz"})
+public class SubmitQuiz extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,32 +46,52 @@ public class LoadQuiz extends HttpServlet {
             HttpSession session = request.getSession();
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             Quiz qm = new Quiz();
-            String selected_quiz = request.getParameter("selected_quiz");
+            Student sm = new Student();
 
-            if (lg.getMatric() != 0) {
-                //Student Load quiz
-                String quizID = request.getParameter("selected_quiz_id");
-                lg.setQuizID(Integer.parseInt(quizID));
-                List<List<String>> quiz = qm.loadQuiz(Integer.parseInt(quizID));
+            String quizSubmission = request.getParameter("ansArray");
 
-                if (quiz != null) {
-                    session.setAttribute("quiz", quiz);
-                }
+            String s = quizSubmission;
+            s = s.replace("[\"", "");
+            s = s.replace("\"", "");
+            s = s.replace("\"]", "");
+            s = s.replace("]", "");
 
-            } else {
-                //Staff Load quiz
-                int quizID = qm.GetQuizID(selected_quiz, lg.getStaffID());
-                List<List<String>> quiz = qm.loadQuiz(quizID);
+            String[] elements = s.split(",");
+            List<String> list = Arrays.asList(elements);
 
-                if (quiz != null) {
-                    session.setAttribute("quiz", quiz);
+            //load quiz and convert given answer to correct answerID
+            int quizID = lg.getQuizID();
+            int score = Integer.valueOf(list.get(list.size() - 1));
+            int matric = lg.getMatric();
+
+            List<List<String>> quiz = qm.loadQuiz(quizID);
+
+            //New list to store updated, correct answerIDs
+            List<String> correctAnswerIDs = new ArrayList();
+
+            for (int i = 0; i < quiz.size(); i++) {
+                for (int u = 2; u < quiz.get(0).size(); u++) {
+                    if (quiz.get(i).get(u).equals(list.get(i))) {
+                        correctAnswerIDs.add(String.valueOf(u - 1));
+                    }
                 }
             }
 
-            RequestDispatcher rd = request.getRequestDispatcher("/takeQuiz.jsp");
-            rd.forward(request, response);
+            //Add Quiz submission instance
+            sm.addSubmission(matric, quizID, score);
 
-        } catch (Exception e) {
+            int submissionID = sm.getSubmissionID(score, quizID, matric);
+
+            if (submissionID != -1) {
+                //Submit Student Answers
+                for (int i = 0; i < correctAnswerIDs.size(); i++) {
+                    sm.addStudentAnswer(Integer.valueOf(correctAnswerIDs.get(i)), submissionID);
+                }
+
+            }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/studentSelect.jsp");
+            rd.forward(request, response);
 
         }
     }

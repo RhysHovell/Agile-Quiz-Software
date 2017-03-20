@@ -4,6 +4,7 @@
     Author     : Adam
 --%>
 
+<%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -29,36 +30,21 @@
   <jsp:include page="navbar.jsp"/>
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-
             List<List<String>> quiz = (List<List<String>>) session.getAttribute("quiz");
-            
-            List<String> studentAnswers = new ArrayList<>();
             List<String> correctAnswers = new ArrayList<>();
-            List<String> questions = new ArrayList<>();
-            
-            
-            //Extract and randomize answers into separate array 
-             for(int i =0; i> quiz.size(); i++){
-                for( int y=2; y<6; y++){
-                    String answer = quiz.get(i).get(y).toString();
-                    questions.add(answer);
-                }                 
-            } 
             
             //Extract correct answers into separate array
-            for(int i =0; i> quiz.size(); i++){
+            for(int i =0; i<quiz.size(); i++){
                 String correctAnswer = quiz.get(i).get(1).toString();
                 correctAnswers.add(correctAnswer);
             }
-                        
-                      
             
             if (quiz == null) {
         %>
         <p> Quiz failed to load </p>
         <%  } else {
         %>
-        <form name="quiz" method="Post"> 
+        <form name="quiz" method="Post" action="SubmitQuiz"> 
         <%
             for(int i=0; i<quiz.size(); i++){
                 int q = 0;  //questions always held at position 0 in arraylist
@@ -92,29 +78,48 @@
          }
         %>
         <br>
-        <button class="btn btn-lg btn-primary btn-block" onclick="" type="submit"> Submit Quiz </button>
+        <input type="hidden" id="ansArray" name="ansArray" value="TEST"> 
+        <button class="btn btn-lg btn-primary btn-block" onclick="return calculateQuiz();" type="submit"> Submit Quiz </button>
         </form>
+        
         <script>
-            var answercount = 0;
-            var correctArr = [];
-            var answerArr = [];
             
-            function myFunction(){
-                alert("click");
-            }
-            
-            function answerchoice(){
-            alert("buttonClick");
-                var answerCount+1;
-                answerArr.push(answer);          
+            function calculateQuiz(){
+                var studentAns = [];
+                var amountCorrect = 0;
+                var quizLength = <%=quiz.size()%>;
                 
-                var elems = document.getElementsByClassName("b"+answerCount.toString());
-                for (var i=0; i<elems.length; i++){
-                    elems[i].disabled = true;
+                var jsArray = [<% for (int i = 0; i < correctAnswers.size(); i++) { %>"<%= correctAnswers.get(i) %>"<%= i + 1 < correctAnswers.size() ? ",":"" %><% } %>];
+                
+                //loop every question and pass answer into array
+                for(var i = 0; i <quizLength; i++) {
+                  var radios = document.getElementsByName("b" + i);
+                  
+                  for(var j = 0; j < radios.length; j++) {
+                    var radio = radios[j];
+                    
+                    if(radio.checked) {
+                       //Add students answerID to array  
+                        studentAns.push(radio.value);
+                        
+                        if(radio.value === jsArray[i]){
+                            amountCorrect++;
+                        }
+                      
+                    }
+                    
+                  }
+                  
                 }
-            };
-            
-            function correctAnswers(){
+                //calculate score and add quizlength, score(%) to answers array and return
+                var finalscore = Math.round((amountCorrect/quizLength)*100);
+                alert("Final score: " + finalscore + "%");
+                
+                studentAns.push(finalscore);
+                
+                var ans = JSON.stringify(studentAns);
+                document.getElementById("ansArray").value = ans;
+                
                 
             }
             

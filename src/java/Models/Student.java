@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
@@ -33,25 +35,22 @@ public class Student {
         
     }
     
-    public Connection ConnectToDB()
-    {
-        Connection conn= null;
- 
-        try
-        {
-          String myDriver="com.mysql.jdbc.Driver";
-          String myURL = "jbdc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
-          Class.forName(myDriver);
-          conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");
-          return conn;
-                 
-        } catch ( SQLException e)
-        {
+    public Connection ConnectToDB() {
+        Connection conn = null;
+
+        try {
+            String myDriver = "com.mysql.jdbc.Driver";
+            String myURL = "jdbc:mysql://silva.computing.dundee.ac.uk/16agileteam6db";
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(myURL, "16agileteam6", "0045.at6.5400");
+            return conn;
+
+        } catch (SQLException e) {
             System.err.println(" there was an SQL exception");
-        } catch (ClassNotFoundException ex) {              
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
-                       
+
         return conn;
     }
     
@@ -134,6 +133,92 @@ public class Student {
             grade = 'A';
         }
         return grade;
+    }
+    
+    public boolean addSubmission(int matric, int quizID, int score){
+        
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        
+        try {
+            //Quiz quizConnect = new Quiz();
+            Connection conn = ConnectToDB();
+            String query = "INSERT INTO studentsubmission(SubDate, MatricNo, Score, QuizID) VALUES (?, ?, ?, ?);";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setDate(1, date);
+            ps.setInt(2, matric);
+            ps.setInt(3, score);
+            ps.setInt(4, quizID);
+
+            ps.execute();
+
+            conn.close();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(" there was an SQL exception: " + e.getMessage());
+        }
+        
+        
+        return false;
+    }
+    
+    public int getSubmissionID(int score, int quizID, int matric) {
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        
+        try{
+            Connection conn = ConnectToDB();
+            String query = "SELECT SubmissionID FROM studentsubmission WHERE QuizID =? AND Score=? AND MatricNo=?";
+
+                PreparedStatement ps = conn.prepareStatement(query);
+                
+                ps.setInt(1, quizID);
+                ps.setInt(2, score);
+                ps.setInt(3, matric);
+
+                ResultSet rs = ps.executeQuery();
+                
+                if (!rs.isBeforeFirst()) {
+                    return -1;
+                } else {
+                    if(rs.next()) {
+                        int submissionID = rs.getInt("SubmissionID");
+                        return submissionID;
+                    }
+                    
+                }
+            
+            
+        } catch (Exception e) {
+            System.err.println(" there was an SQL exception: " + e.getMessage());
+        }
+        
+        return -1;
+    }
+    
+    public boolean addStudentAnswer(int answerID, int submissionID){
+        
+        try {
+            //Quiz quizConnect = new Quiz();
+            Connection conn = ConnectToDB();
+            String query = "INSERT INTO studentanswer(answerID, submissionID) VALUES (?, ?);";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setInt(1, answerID);
+            ps.setInt(2, submissionID);
+
+            ps.execute();
+
+            conn.close();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(" there was an SQL exception: " + e.getMessage());
+        }
+        
+        return false;
     }
     
      
