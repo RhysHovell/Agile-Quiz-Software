@@ -80,6 +80,42 @@
                             
                             <hr>
              
+                                  <h2> Add a new question to your quiz</h2>           
+               
+                       <form name="questionform" form method ="POST" action ="AddQuestion" >
+        
+                           <input type="hidden"  name="edit" value="edit">     
+             <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
+                <input id = "question" type="number"  name="question_number" class ="form-control" placeholder="Enter Question Number Here">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
+                <input id = "question" type="text"  name="question_asked" class ="form-control" placeholder="Enter Question Here">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"role ="button"></i></span>
+                <input id="answerOne" type="text" class="form-control" name="correct_answer" placeholder="Enter The Correct Answer Here">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove"role ="button"></i></span>
+                <input id="answerTwo" type="text" class="form-control" name="answer_two" placeholder="Enter Answer Two Here">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove"role ="button"></i></span>
+                <input id="answerThree" type="text" class="form-control" name="answer_three" placeholder="Enter Answer Three Here">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-remove" role ="button"></i></span>
+                <input id="answerFour" type="text" class="form-control" name="answer_four" placeholder="Enter Answer Four Here">
+            </div>
+                           <br>
+                           <button class="btn btn-lg btn-primary btn-block" type="submit" name="module">Add Question</button>
+                           <hr>
                          
         
         
