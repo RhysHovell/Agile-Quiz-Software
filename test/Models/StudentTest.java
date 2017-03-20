@@ -19,7 +19,7 @@ import org.junit.runners.Parameterized;
  *
  * @author rhyshovell
  */
-@RunWith(value=Parameterized.class)
+
 public class StudentTest {
     
     public StudentTest() {
@@ -83,7 +83,6 @@ public class StudentTest {
         assertEquals(expResult, result); 
     }
      */
-    
     @Test
     public void testThatStudenGradeIsEqualToA(){
         Student student = new Student();
@@ -115,4 +114,10 @@ public class StudentTest {
         assertEquals('F', student.grade);
     }
     
+    @Test
+    public void testIfGradeIsEmpty(){
+        Student student = new Student();
+        boolean empty = student.isEmpty();
+        assertTrue("Grade is not empty", empty);
+    }
 }

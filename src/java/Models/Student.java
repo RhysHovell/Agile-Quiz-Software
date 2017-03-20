@@ -12,21 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  *
  * @author gary-
  */
-@RunWith(value = Parameterized.class)
-public class Student {
+public class Student{
     
-    @Parameter (value=0)
+  
     public char grade;
     
     public Student() {
@@ -88,6 +81,11 @@ public class Student {
         return false;
     }
     
+    boolean isEmpty(){
+        
+        return true;
+        
+    }
     public boolean existingUserCheck(int matricNo){
         
         //PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
@@ -114,7 +112,6 @@ public class Student {
                 
     }
     
-    @Parameters()
     public int specifyGrade(int result){
         
         
