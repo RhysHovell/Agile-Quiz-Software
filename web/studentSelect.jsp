@@ -56,26 +56,27 @@
 
             if (quizList == null) {
         %>
-        <p> No Quizzes Available </p>
+        <h2> No Quizzes Available </h2>
         <%  } else {
 
             String quizID = "";
             String quizName = "";
 
         %>
-        <p> Available Quizzes: </p>
+        <div class ="container">
+        <h2> Available Quizzes: </h2>
         <%    for (int i = 0; i < quizList.get(0).size(); i++) {
                 quizID = quizList.get(0).get(i).toString();
                 quizName = quizList.get(1).get(i).toString();
         %>
-        <p> Quiz ID: <%=quizID%>  </p>
-        <p> Quiz Name: <%=quizName%>  </p>
+        <h3> Quiz ID: <%=quizID%>  </h3>
+        <h3> Quiz Name: <%=quizName%>  </h3>
         <form method="POST" action="LoadQuiz">
             <input type="hidden" name="selected_quiz" id="quizID" value="<%=quizName%>">
             <input type="hidden" name="selected_quiz_id" id="quizID" value="<%=quizID%>">
-            <button class="btn-lg" type="submit">Load Quiz</button>            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Load Quiz</button>            
         </form>
-        <p> </p>
+        </div>
         <%
 
                 }

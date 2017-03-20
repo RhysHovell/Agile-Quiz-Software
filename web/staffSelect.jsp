@@ -54,26 +54,27 @@
             List<List<String>> quizList = (List<List<String>>) session.getAttribute("quizList");
             if (quizList == null) {
         %>
-        <p> No Quizzes Available </p>
+        <h2> No Quizzes Available </h2>
         <%  } else {
             String x = "";
             String y = "";
         %>
-        <p> Available Quizzes: </p>
+        <div class ="container"> 
+            <h2>Available Quizzes</h2>
         <%    for (int i = 0; i < quizList.get(0).size(); i++) {
                 x = quizList.get(0).get(i).toString();
                 y = quizList.get(1).get(i).toString();
                 //String button_name= "button"+i; 
 %>
       <!--  <p> QuizID: <%=x%>  </p>-->
-        <p> Quiz Name: <%=y%>  </p>
+        <h3> Quiz Name: <%=y%>  </h3>
          <form name="gotoedit" method="POST" action="ViewQuiz">
          
          <input type="hidden" name="chosen_id"  value="<%=x%>" >
-        <button type="submit" name="selected_quiz" value="<%=y%>" >Edit This Quiz</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="selected_quiz" value="<%=y%>" >Edit This Quiz</button>
         <hr>
         </form>
-       
+        </div>
         <%
                 }
             }
