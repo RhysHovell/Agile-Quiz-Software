@@ -44,6 +44,7 @@ public class LoadQuiz extends HttpServlet {
             String selected_quiz = request.getParameter("selected_quiz");
 
             if (lg.getMatric() != 0) {
+                //Student Load quiz
                 String quizID = request.getParameter("selected_quiz_id");
                 List<List<String>> quiz = qm.loadQuiz(Integer.parseInt(quizID));
 
@@ -52,6 +53,7 @@ public class LoadQuiz extends HttpServlet {
                 }
 
             } else {
+                //Staff Load quiz
                 int quizID = qm.GetQuizID(selected_quiz, lg.getStaffID());
                 List<List<String>> quiz = qm.loadQuiz(quizID);
 
