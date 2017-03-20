@@ -593,7 +593,70 @@ public class Quiz {
      }
        
        
-       
+    public List<List<Integer>> staffResults(int MatricNo)
+    {
+        List<List<Integer>> results = new ArrayList<>();
+        List<Integer> quiz = new ArrayList<>();
+        List<Integer> score = new ArrayList<>();
+        List<Integer> questionNo = new ArrayList<>();
+        List<Integer> sAnswer = new ArrayList<>();
+        List<Integer> cAnswer = new ArrayList<>();
+    
+        PreparedStatement ps;
+        Connection conn = ConnectToDB();
+    
+        if (conn != null) {
+            try {
+                String query = "Select studentsubmission.QuizID, studentsubmission.Score, question.QuestionNo, studentanswer.StudentAnswerID, studentanswer.AnswerID From studentsubmission JOIN studentanswer ON (studentsubmission.SubmissionID = studentanswer.SubmissionID) JOIN question ON (studentsubmission.QuizID = question.QuizID)Where studentsubmission.MatricNo =?";
+
+                 ps = conn.prepareStatement(query);
+                 ps.setInt(1, MatricNo);
+                ResultSet rs = ps.executeQuery();
+                // ps.setInt(1, MatricNo);
+                if (!rs.isBeforeFirst()) {
+                    return null;
+                }
+                int i = 0;  
+                while (rs.next()) {
+                    int quizID = rs.getInt("studentsubmission.QuizID");
+                    int total = rs.getInt("Score");
+                    int QNo = rs.getInt("QuestionNo");
+                    int studentAnswer = rs.getInt("StudentAnswerID");
+                    int correctAnswer = rs.getInt("AnswerID");
+                    
+                    quiz.add(quizID);
+                    score.add(total);
+                    questionNo.add(QNo);
+                    sAnswer.add(studentAnswer);
+                    cAnswer.add(correctAnswer);
+
+                 i++;
+                }
+                
+                ps.close();
+                conn.close();
+                
+                
+                results.add(quiz);
+                results.add(score);
+                results.add(questionNo);
+                results.add(sAnswer);
+                results.add(cAnswer);
+                
+                
+                
+                return results;
+
+            } catch (Exception e) {
+
+            }
+
+        }
+        
+        return null;
+    
+    
+    }   
        
     
     
