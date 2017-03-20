@@ -20,7 +20,12 @@
                 <li class="nav"><a href="startScreen.jsp">Start Screen</a></li>
      
                   <li class="nav"><a href="staffSelect.jsp">Staff Quiz Select</a></li>
-                <li class="nav"><a href="index.jsp">Home</a></li>
+
+                   <li class="nav"><a href="staffResults.jsp">Staff Results</a></li>
+                 
+                  
+                  
+                  <li class="nav"><a href="index.jsp">Home</a></li>
                 <li class="nav"><a href="Logout">Logout</a></li>
               </ul>
             </div>
