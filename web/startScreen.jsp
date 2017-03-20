@@ -4,6 +4,7 @@
     Author     : Adam
 --%>
 
+<%@page import="AgileQuiz.stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang = "en">
@@ -27,7 +28,30 @@
       
           
     <body>
-     <jsp:include page="navbar.jsp"/>
+                 <%    
+            HttpSession Session= request.getSession();
+            LoggedIn logged = (LoggedIn) request.getSession().getAttribute("LoggedIn");
+            if (logged==null)
+            {
+           %>
+           <jsp:include page="navbar.jsp"/>
+           
+           <%
+               }
+            else if(logged.getStaffID()!=0) 
+{
+               %>
+               <jsp:include page="staffnavbar.jsp"/>
+               <%
+                   }
+                   else if (logged.getMatric()!=0)
+                           {
+                            
+                   %>
+                       <jsp:include page="studentnavbar.jsp"/>
+                       <%
+                           }
+                           %>
         <div class = "container">
             <form class="selectLogin">
                 <h2>Sign in as...</h2>

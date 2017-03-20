@@ -29,7 +29,30 @@
 
         <title>JSP Page</title>
     </head>
-    <jsp:include page="navbar.jsp"/>
+                <%    
+            HttpSession Session= request.getSession();
+            LoggedIn logged = (LoggedIn) request.getSession().getAttribute("LoggedIn");
+            if (logged==null)
+            {
+           %>
+           <jsp:include page="navbar.jsp"/>
+           
+           <%
+               }
+            else if(logged.getStaffID()!=0) 
+{
+               %>
+               <jsp:include page="staffnavbar.jsp"/>
+               <%
+                   }
+                   else if (logged.getMatric()!=0)
+                           {
+                            
+                   %>
+                       <jsp:include page="studentnavbar.jsp"/>
+                       <%
+                           }
+                           %>
     </nav>
     <body>
         <nav class="navbar navbar-default">
